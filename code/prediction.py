@@ -1,19 +1,17 @@
 """Load Image, predict intentional framing"""
 import os
 import glob
+import conf
 import urllib
 import operator
 import numpy as np
 import pandas as pd
 from xml.dom import minidom
+
+
 from keras.preprocessing import image
 from keras.models import model_from_json
 from keras.applications.inception_v3 import preprocess_input
-
-# model path
-MODEL_PATH = '/Users/wbcha/Desktop/Thesis-Repo/model.json'
-# weight path
-WEIGHT_PATH = '/Users/wbcha/Desktop/Thesis-Repo/model.h5'
 
 classes = {'art': 0,
 	'candid': 1,
@@ -28,17 +26,17 @@ classes = {'art': 0,
 	'structure': 10}
 classes = sorted(classes.items(), key=operator.itemgetter(1))
 
-def _prepare_model():
+def prepare_model():
 	"""prepare pre-trained model for intents classification."""
 	def load_model():
 		"""load model"""
-		with open(MODEL_PATH, 'r') as f:
+		with open(conf.MODEL_PATH, 'r') as f:
 			loaded_model_json = f.read()
 			return model_from_json(loaded_model_json)
 
 	def load_weights(model):
 		"""Load mode weights."""
-		model.load_weights(WEIGHT_PATH)
+		model.load_weights(conf.WEIGHT_PATH)
 		return model
 
 	def compile_model(model):
@@ -50,10 +48,12 @@ def _prepare_model():
 
 	return compile_model(load_weights(load_model()))
 
-def _make_prediction(url, img_id, model, classes):
+def make_prediction(url, img_id, model, classes, from_path=None):
 	"""Download store in temp, make prediction, remove."""
 	def download_img(url, img_id):
 		"""Download image."""
+		if from_path:
+			return from_path
 		img_path = ''.join([TEMP_PATH, img_id, '.jpg'])
 		urllib.urlretrieve(url, img_path)
 		return img_path
@@ -77,17 +77,9 @@ def _make_prediction(url, img_id, model, classes):
 				label = c
 		return prob, label
 
-	def remove_img(img_path):
-		"""Unlink image"""
-		try:
-			os.unlink(img_path)
-		except:
-			pass
-
 	img_path = download_img(url, img_id)
 	img = pre_process(img_path)
 	prob, label = predict(model, img, classes)
-	remove_img(img_path)
 	return prob, label
 
 
