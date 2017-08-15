@@ -1,3 +1,6 @@
 numpy>=1.11.0
 pandas>=0.20.3
 keras>=2.0.5
+tqdm>=4.15.0
+matplotlib>-1.4.2
+Pillow>=4.1.1
