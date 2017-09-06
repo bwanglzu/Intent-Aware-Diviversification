@@ -2,6 +2,10 @@
 
 Beyond Concept Detection: The Potential of User Intent for Image Retrieval
 
+### Example
+
+![rerank_accordion](./example_data/diversification/rerank_accordian.jpg)
+
 ### Initialize
 
 Install tensorflow: [tensorflow](https://www.tensorflow.org/install/)
