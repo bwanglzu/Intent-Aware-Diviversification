@@ -11,7 +11,7 @@ Beyond Concept Detection: The Potential of User Intent for Image Retrieval
 Install tensorflow: [tensorflow](https://www.tensorflow.org/install/)
 
 ```python
-git clone https://github.com/bwanglzu/ACMMM-MUSA-2017.git
+git clone project-uri
 pip install -r requirements.txt
 ```
 
