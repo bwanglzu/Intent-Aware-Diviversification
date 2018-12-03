@@ -28,7 +28,3 @@ First, an expert annotator carries out a large number of iterative intent judgme
 Next, analysis of the distribution of concepts and intent classes reveals patterns of independence both at a global and user level.
 
 Finally, we report the results of experiments showing that a deep neural network classifier is capable of learning to differentiate between these intent classes, and that these classes support the diversification of image search results.
-
-### Open Dataset
-
-15618 images with associated intent (belongs to 14 classes, subset of YFCC100M) can be download [here]().
