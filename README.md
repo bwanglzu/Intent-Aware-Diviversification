@@ -1,4 +1,4 @@
-### ACMMM-MUSA-2017
+### Intent-Aware-Diversification
 
 Beyond Concept Detection: The Potential of User Intent for Image Retrieval
 
